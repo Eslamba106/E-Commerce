@@ -11,17 +11,17 @@ return new class extends Migration
     {
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->longText('description');
-            $table->string('logo');
-            $table->string('favicon');
-            $table->string('email');
-            $table->string('phone');
-            $table->string('address');
-            $table->string('facebook');
-            $table->string('twitter');
-            $table->string('instagram');
-            $table->string('linkedin');
+            $table->string('title')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('logo')->nullable();
+            $table->string('favicon')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('linkedin')->nullable();
             $table->timestamps();
         });
     }
