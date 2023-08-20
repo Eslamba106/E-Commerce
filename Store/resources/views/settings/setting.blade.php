@@ -54,7 +54,14 @@
 
                                 <div class="form-group">
                                     <label for="validationCustom05" class="col-form-label pt-0">لوجو الموقع</label>
-                                    <input type="file" name="logo" id="validationCustom05" class="form-control" >
+                                    <input type="file" name="logo" id="validationCustom05" class="form-control dropify"  data-default-file="{{asset($setting->logo)}}"  >
+
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="validationCustom05" class="col-form-label pt-0">الصورة المفضلة</label>
+                                    <input type="file" name="favicon" id="validationCustom05" class="form-control dropify" data-default-file="{{asset($setting->favicon)}}" >
+
                                 </div>
                                 <div class="form-group">
                                     <label for="validationCustom05" class="col-form-label pt-0" ><span>*</span>

@@ -7,21 +7,27 @@ use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use App\Utils\ImageUpload ;
 
 class SettingController extends Controller
 {
     public function index(){
         return view('settings.setting');
     }
-    public function update(SettingUpdateRequest $request , Setting $setting){
-        $setting->update($request->validated());
-        $imagepath = uniqid().date('d-m-Y').$request->logo->extension();
-        $request->logo->move(public_path('/logo') , $imagepath);
+    public function update(SettingUpdateRequest $request , Setting $setting ){
+        
+        $setting->update($request->validated());  
+        if($request->has('logo')){
+            $logo = ImageUpload::imageuploade($request->logo , 100 , 200 , 'logo');
+            $setting->update(['logo' => $logo]);
+        }
+        if($request->has('favicon')){
+            $favicon = ImageUpload::imageuploade($request->favicon , 100 , 200 ,'favicon');
+            $setting->update(['favicon' => $favicon]);
+        }
 
-        $setting->update(['logo' => 'public/logo'.$imagepath]);
-        // Storage::disk('public')->put('logo/'.$imagepath , $logo);
-        dd($imagepath);
-        return redirect()->route('dashboard.settings.index')->with('success' , 'تم التحديث بنجاح');
+
+return redirect()->route('dashboard.settings.index')->with('success' , 'تم التحديث بنجاح');
 
 
 
