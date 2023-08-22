@@ -27,14 +27,16 @@
                        <form action="" class="needs-validation">
                         <div class="form-group">
                             <label  class="col-form-label pt-0" for="validationCustom05">الاسم</label>
-                            <input type="text" name="name" id="validationCustom05" class="form-control">
+                            <input type="text" name="name" id="validationCustom05" class="form-control" value="{{ $category->name }}">
                         </div>
 
                         <div class="form-group">
-                            <label for="name">الاسم</label>
+                            <label for="name">القسم الرئيسي</label>
                             <select name="" id="validationCustom05" class="form-control">
-                                <option value="القسم الرئيسي">القسم الرئيسي</option>
-                                <option value="القسم الفرعي">القسم الفرعي</option>
+                                <option value="" @if ($category->parent_id == null) selected  @endif>قسم رئيسي</option>
+                                @foreach ($main as $item)
+                                    <option value="{{ $category->id }}" @if ($item->id == $category->parent_id) selected  @endif>{{ $item->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">

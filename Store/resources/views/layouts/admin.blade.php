@@ -17,9 +17,9 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap_rtl-v4.2.1/custom_rtl.css') }}">
     <link rel="stylesheet" href="{{ asset('css/mycustomstyle.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dropify.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('css/dropify.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css') }}">
+  
 
     <link rel="stylesheet" href="{{ asset('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css') }}">
   </head>
@@ -65,16 +65,15 @@
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
-<script src="{{ asset('js/dropify.js') }}"></script>
 <script src="{{ asset('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js') }}"></script>
 {{-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script> --}}
 <script src="{{ asset('https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js') }}"></script>
 <script src="{{ asset('https://code.jquery.com/jquery-3.7.0.js') }}"></script>
 <script src="{{ asset('https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js') }}"></script>
-<script>
-  $('.dropify').dropify();
-</script>
+<script src="{{ asset('js/dropify.js') }}"></script>
+<script src="{{ asset('js/dropify.min.js') }}"></script>
+<script>$('.dropify').dropify();</script>
 @stack('script')
 </body>
 </html>

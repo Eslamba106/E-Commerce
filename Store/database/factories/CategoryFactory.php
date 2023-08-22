@@ -20,7 +20,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
-            'parent_id' =>null,
+            // 'parent_id' =>null,
             'image_path' => $this->faker->word().'.jpg',
         ];
     }
