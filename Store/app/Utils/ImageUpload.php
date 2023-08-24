@@ -6,16 +6,17 @@ use Illuminate\Support\Str ;
 use Illuminate\Support\Facades\Storage ;
 
 
-class ImageUpload {
-public static function imageuploade($request, $height = null , $width = null , $imagename= 'image'){
 
-    $imagepath = Str::uuid().'-'.date('d-m-Y'). '.' . $request->extension();
+class ImageUpload {
+public static function imageuploade($request,$imagename= 'image' ,$height = null , $width = null ){
+
+    $imagepath =uniqid().'-'.date('d-m-Y'). '.' . $request->extension();
     [$widthDefault , $heightDefault] = getimagesize($request);
     $height = $height ?? $heightDefault ;
     $width = $width ?? $widthDefault ;
 
-    $request->move(public_path("$imagename") , $imagepath);
-    return  $imagename."/".$imagepath ;
+    $request->move(public_path("images/$imagename") , $imagepath);
+    return  'images/'.$imagename."/".$imagepath ;
 
 } 
 }

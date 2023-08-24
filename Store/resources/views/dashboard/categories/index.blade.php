@@ -78,8 +78,7 @@
                                     <label for="validationCustom01" class="mb-1">الاسم</label>
                                     <input class="form-controller" id="validationCustom01" type="text" name="name" value="">
                                 </div>
-        
-        
+
                                 <div class="form-group">
                                     <label for="validationCustom01" class="mb-1">القسم الرئيسي</label>
                                     <select name="parent_id" id="validationCustom01" class="form-controller" >
@@ -103,8 +102,8 @@
                         <button class="btn btn-secondary"  type="button" data-dismiss="modal">إغلاق</button>
                     </div>
                 
-            </form>
                 </div>
+            </form>
             </div>
         </div>
 

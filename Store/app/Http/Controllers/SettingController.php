@@ -12,17 +12,17 @@ use App\Utils\ImageUpload ;
 class SettingController extends Controller
 {
     public function index(){
-        return view('settings.setting');
+        return view('dashboard.settings.setting');
     }
     public function update(SettingUpdateRequest $request , Setting $setting ){
         
         $setting->update($request->validated());  
         if($request->has('logo')){
-            $logo = ImageUpload::imageuploade($request->logo , 100 , 200 , 'logo');
+            $logo = ImageUpload::imageuploade($request->logo ,'logo', 100 , 200 );
             $setting->update(['logo' => $logo]);
         }
         if($request->has('favicon')){
-            $favicon = ImageUpload::imageuploade($request->favicon , 100 , 200 ,'favicon');
+            $favicon = ImageUpload::imageuploade($request->favicon ,'favicon' , 100 , 200 );
             $setting->update(['favicon' => $favicon]);
         }
 

@@ -5,14 +5,22 @@ namespace App\Services ;
 use DataTables ;
 use App\Models\Category ;
 use App\Utils\ImageUpload;
+use App\Repositorties\CategoryRepository;
 
 class CategoryServices 
 {
+
+    public $CategoryRepository ;
+    public function __construct(CategoryRepository $repo){
+        $this->CategoryRepository = $repo ;
+    }
     public function getMainCategory(){
-        return Category::where('parent_id' , 0)->orwhere('parent_id' , null)->get();
+        return $this->CategoryRepository->getMainCategory();
     }
     public function dataTable(){
-        $data = Category::select('*')->with('parent');
+        // $data = Category::select('*')->with('parent');
+
+        $data = $this->CategoryRepository->baseQuery(['parent']);
         return DataTables::of($data)
         ->addIndexColumn()//->make(true) ;
         
@@ -42,22 +50,31 @@ class CategoryServices
         ->rawColumns([ 'name'  ,'image_path' , 'parent', 'action' ])//'id',
         ->make(true);
     }
-
-
-
     public function store($varibles){
 
+        $varibles['parent_id'] = $varibles['parent_id'] ?? 0 ;
         if(isset($varibles['image_path'])){
             $varibles['image_path'] = ImageUpload::imageuploade($varibles['image_path']);
         }
-        $varibles['parent_id'] = $varibles['parent_id'] ?? 0 ;
 
-        return Category::create($varibles);
+        return $this->CategoryRepository->store($varibles);
+        // return Category::create($varibles);
     }
-
-
-
-    public function getById($id){
-        return Category::where('id' , $id)->firstOrFail();
+    public function getById($id , $childcount = false){
+        return $this->CategoryRepository->getById($id ,$childcount );
+    }
+    public function update($id , $varibles){
+        
+        // $category = $this->getById($id);
+        // $varibles['parent_id'] = $varibles['parent_id'] ?? 0 ;
+        // if(isset($varibles['image_path'])){
+        //     $varibles['image_path'] = ImageUpload::imageuploade($varibles['image_path'] , 'Category');
+        // }
+        // return $category->update($varibles);
+        return $this->CategoryRepository->update($id ,$varibles);
+    }
+    public function delete($request){
+        // Category::whereId($request->id)->delete();
+        $this->CategoryRepository->delete($request);
     }
 }

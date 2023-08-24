@@ -9,7 +9,10 @@ use DataTables ;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Requests\Dashboard\Categories\CategoryDeleteRequest ;
 use App\Services\CategoryServices;
+use Illuminate\Support\Str ;
 use App\Http\Requests\Dashboard\Categories\CategoryStoreRequest ;
+use App\Http\Requests\Dashboard\Categories\CategoryUpdataRequest ;
+use App\Utils\ImageUpload;
 
 
 
@@ -34,42 +37,34 @@ class CategoryController extends Controller
     }
 
 
-    public function create()
-    {
-        //
-    }
-
-
     public function store(CategoryStoreRequest $request)
     {
        $this->categoryService->store($request->validated());
        return redirect()->route('dashboard.category.index')->with('success' , 'تم الاضافة بنجاح');
     }
 
-    public function show(string $id)
-    {
-        //
-    }
-
     public function edit($id)
     {
         $category = $this->categoryService->getById($id);
-        $main = $this->categoryService->getMainCategory() ;
-         return view('dashboard.categories.edit' , compact('category' , 'main'));
+        $main = $this->categoryService->getMainCategory();
+        return view('dashboard.categories.edit' , compact('category' , 'main'));
     }
 
-    public function update(Request $request, string $id)
+
+
+    public function update($id ,CategoryUpdataRequest $request)
     {
-        //
+    $this->categoryService->update($id , $request->validated());
+    return redirect()->route('dashboard.category.index' );
+
     }
 
-    public function destroy(string $id)
-    {
-        //
-    }
+
     public function delete(CategoryDeleteRequest $request)
     {
-        Category::whereId($request->id)->delete();
+        // Category::whereId($request->id)->delete();
+
+        $this->categoryService->delete($request->validated());
         return redirect()->route('dashboard.category.index');
     }
 }
