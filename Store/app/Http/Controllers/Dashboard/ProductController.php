@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Dashboard;
 use Illuminate\Http\Request;
 use App\Services\ProductServices;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\Dashboard\Store\StoreProductRequest;
+use App\Services\CategoryServices;
 class ProductController extends Controller
 {
-    private $productService ;
-    public function __construct(ProductServices $productService){
+    public ProductServices $productService ;
+    public CategoryServices $categoryService  ;
+    public function __construct(ProductServices $productService , CategoryServices $categoryService ){
         $this->productService = $productService ;
+        $this->categoryService = $categoryService ;
     }
 
     public function index()
@@ -23,19 +26,22 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('dashboard.products.create');
+        $categories = $this->categoryService->getall(); 
+        return view('dashboard.products.create' , compact('categories'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
-        //
+        $products = $this->productService->store($request->validated());
+        return redirect()->route('dashboard.products.index' , compact('products'));
     }
     public function getall(Request $request)
     {
-        return $this->productService->dataTable();
+        return  $this->productService->dataTable();
+        // return $query ;
     }
 
     /**
@@ -65,6 +71,10 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    // public function delete(string $id)
+    // {
+    //     //
+    // }
     public function destroy(string $id)
     {
         //

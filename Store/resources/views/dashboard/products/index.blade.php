@@ -25,6 +25,7 @@
                 <div class="card">
                     <div class="card-header">
                         <form action="" class="form-inline search-form search-box"> 
+                            
                         </form>
                         <a href="{{ route('dashboard.products.create') }}">
                             <button type="button" 
@@ -53,7 +54,6 @@
                                             <th style="text-align: center" >التخفيض الاساسي</th>
                                             <th style="text-align: center" > عدد الالوان المتوفرة</th>
                                             <th style="text-align: center" >action</th>
-
                                         </tr>
 
                                 </thead>
@@ -77,22 +77,10 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 @push('script')
 <script type="text/javascript">
     new DataTable('#TableProduct' , {
-        ajax: "dashboard/products/getall",
+        ajax: "dashboard/products/ajax",
         serverSide: true,
         processing: true ,
         columns: [
@@ -104,10 +92,10 @@
         { data: 'action' },
     ]
     });
-    $('#TableProduct tbody').on('click' , '#deleteBtn' , function(argument){
-        var id = $(this).attr('data-id');
+    // $('#TableProduct tbody').on('click' , '#deleteBtn' , function(argument){
+    //     var id = $(this).attr('data-id');
 
-        $('#deletemodal #id').val(id);
-    })
+    //     $('#deletemodal #id').val(id);
+    // })
 </script> 
 @endpush

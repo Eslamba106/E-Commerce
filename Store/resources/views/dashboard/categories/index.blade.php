@@ -108,13 +108,6 @@
         </div>
 
 </div>
-
-
-
-
-
-
-
 <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form action="{{ Route('dashboard.category.delete') }}" method="post">
@@ -140,9 +133,6 @@
         </form>
     </div>
 </div>
-
-
-
 @endsection
 
 @push('script')

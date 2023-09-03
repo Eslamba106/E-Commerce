@@ -7,40 +7,37 @@ use App\Utils\ImageUpload;
 
 class ProductRepository implements RepositoryInterface
 {
-    public $product ;
+    public Product $product ;
     public function __construct(Product $product){
         $this->product = $product ;
     }
-    public function baseQuery($relations=[]) {
+    public function baseQuery($relations=[] , $withCount=[]) {
         $query = $this->product->select('*')->with($relations);
+        foreach($withCount as $key => $value){
+            $query->withCount($value);
+        }
         return $query ;
     }
     public function getMainCategory(){
         return $this->product->where('id' , 0)->get();
     }
     public function store($varibles){
-        // return Product::create($varibles);
+        // dd($varibles);
+        return Product::create($varibles);
     }
     public function getById($id , $childcount = false){
-        // $query = Product::where('id' , $id);
-        // if( $childcount){
-        //     $query->withCount('child');
-        // }
-    
-        // return $query->firstOrFail();
+        return $this->product->where('id' , 0)->get();
+        
     }
     public function update($id , $varibles){
-        // $product = $this->getById($id);
-        // $varibles['parent_id'] = $varibles['parent_id'] ?? 0 ;
-        // if(isset($varibles['image_path'])){
-        //     $varibles['image_path'] = ImageUpload::imageuploade($varibles['image_path'] , 'Product');
-        // }
-        // return $product->update($varibles);
+        $product = $this->getById($id);
+
+        return $product->update($varibles);
     }
     public function delete($varibles){
 
-        // $product = $this->getById($varibles['id']);
-        // return $product->delete();
-        // Product::whereId($request->id)->delete();
+        $product = $this->getById($varibles['id']);
+        return $product->delete();
+
     }
 }

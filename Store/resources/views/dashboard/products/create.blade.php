@@ -33,24 +33,30 @@
                     </div>
                     <div class="card-body">
                         <div class="digital-add needs-validation">
-                            <form action="{{ route('dashboard.products.index') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.products.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            @method('PUT')
+                            {{-- @method('PUT') --}}
                                 @if ($errors->any())
                                 {!! implode('', $errors->all('<div>:message</div>')) !!}
                                     
                                 @endif
 
 
-
-
-
-                        
-
                                 <div class="form-group">
                                     <label for="validationCustom05">القسم </label>
-                                    <select name=">category_id" id="validationCustom05" class="form-control">
-                                        <option value="" > اختر القسم</option>                                    
+                                    <select name="category_id" id="validationCustom05" class="form-control" required>
+                                        <option value="" > اختر القسم</option>   
+                                        @foreach ($categories as $category)
+                                        @if ($category->parent_id == 0)
+                                            
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif
+                                            @foreach ($category->child as $child)
+                                                <option value="{{ $child->id }}">
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;--&nbsp;{{ $child->name }}
+                                                </option>
+                                            @endforeach
+                                        @endforeach                                 
                                     </select>
                                 </div>
                                 

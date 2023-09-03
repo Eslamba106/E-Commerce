@@ -77,4 +77,7 @@ class CategoryServices
         // Category::whereId($request->id)->delete();
         $this->CategoryRepository->delete($request);
     }
+    public function getall(){
+        return $this->CategoryRepository->baseQuery(['child'])->get();
+    }
 }
